@@ -1,0 +1,42 @@
+body{
+padding: 0;
+margin: 0;
+background: #242582;
+
+} 
+.container{
+  color: wheat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+}
+table{
+  margin-top: -20px;
+  width: 500px;
+  line-height: 20px;
+  border: 3px solid gray;
+  border-radius: 20px;
+  text-align: center;
+}
+
+table .qty{
+  width: 50px;
+  background: #242582;
+  color: wheat;
+}
+.tableSecondPortion{
+  margin-left: 100px;
+}
+table .checkbox{
+  background: #242582;
+  color: wheat;
+}
+button{
+  background: #242582;
+  color: wheat;
+  padding: 10px 20px;
+  border: 3px solie gray;
+  border-radius: 20px;
+}
