@@ -3,9 +3,10 @@ import React, { useEffect, useState, useRef } from 'react';
 // import { Practice } from "./Practice/Practice"
 // import Practice1 from "./Practice/Practice2"
 function App() {
+  const [checkboxes,setCheckboxes] = useState([])
   let dishes = [
     {name:"Biryani", price:150,ordered:false},
-    {name:"Qorma", price:250},
+    {name:"Qorma", price:250,ordered:false},
     {name:"Shawarma", price:120},
     {name:"Mutton White Karahi", price:1450},
     {name:"Pizza", price:1299},
@@ -14,8 +15,9 @@ function App() {
     {name:"Mutton Polao", price:570},
     {name:"Beef Polao", price:110}
   ]
-   let filteredDishes; 
-  console.log(filteredDishes);
+  useEffect(()=> {
+    console.log(checkboxes)
+  },[checkboxes])
   let showName = useRef();
   let showPrice = useRef();
   let showQty = useRef();
@@ -34,21 +36,10 @@ function App() {
             dish.quantity = evt.target.value
           }}
           type="number" className="qty"/></td>
-          <td><input onChange={(evt)=>{
-            if (dish.ordered === false){
-              dish.ordered = evt.target.checked
-            }else if(dish.ordered === true){
-              dish.ordered = false
-            }
-            dish.ordered= evt.target.checked
-            filteredDishes = dishes.filter((dishf)=>{
-              return dishf.ordered
-            })
-            console.log(filteredDishes);
-
-
-          }}
-          type="checkbox" className="checkbox"></input></td>
+          <td><input 
+          type="checkbox" checked={checkboxes[dish.name.toLowerCase().split(" ").join("_")] || false} onChange={(e)=> {
+            setCheckboxes(c=> ({...c, [dish.name.toLowerCase().split(" ").join("_")]: e.target.checked}))
+          }} className="checkbox"/></td>
         </tr>
     })
   }    
@@ -61,23 +52,12 @@ function App() {
     <td>Disc (10%) =</td>
     <td>Grand Total =</td>
   </tr>
-  <tr ref={showName}>
-   
-    <td><ul><li>150</li></ul></td>
-    <td><ul><li>3</li></ul></td>
-    <td><ul><li>450</li></ul></td>
-    <td><ul><li>45</li></ul></td>
-    <td><ul><li>415</li></ul></td>
+  <tr ref={showName}>  
+  {/* <td ref={showPrice}>   */}
+  {/* </td> */}
   </tr>
   
   <tr><button onClick={()=>{
-    let mapedDishes = filteredDishes.map((dishM)=>{
-      console.log(dishM.name);
-      return dishM.name
-    })
-    showName.current.innerHTML = mapedDishes.map((sdish)=>{return {sdish}.toString()})
-    
-    console.log(mapedDishes);
   }}>Calculate</button></tr>
   </div>
   </table>
